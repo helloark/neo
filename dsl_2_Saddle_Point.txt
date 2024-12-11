@@ -1,0 +1,126 @@
+def accept_matrix():
+    r = int(input("Enter the number of rows: "))
+    c = int(input("Enter the number of columns: "))
+    print("Enter the elements of the matrix:")
+    M = [[int(input()) for _ in range(c)] for _ in range(r)]
+    print("Matrix accepted.")
+    return M, r, c
+
+def display_matrix(M):
+    print("Matrix:")
+    for row in M:
+        print(" ".join(map(str, row)))
+
+def find_saddle_point(M, r, c):
+    saddle_found = False
+    for i in range(r):
+        min_val = min(M[i])
+        col_index = M[i].index(min_val)
+        if all(min_val >= M[row][col_index] for row in range(r)):
+            saddle_found = True
+            print(f"{min_val} is a saddle point.")
+    if not saddle_found:
+        print("No saddle point found.")
+
+def main():
+    M = []
+    r = c = 0
+    while True:
+        print("\n1. Accept matrix"
+              "\n2. Display matrix"
+              "\n3. Find saddle point"
+              "\n4. Exit")
+        choice = int(input("Enter your choice: "))
+        if choice == 1:
+            M, r, c = accept_matrix()
+        elif choice == 2:
+            if M:
+                display_matrix(M)
+            else:
+                print("Matrix not yet defined.")
+        elif choice == 3:
+            if M:
+                find_saddle_point(M, r, c)
+            else:
+                print("Matrix not yet defined.")
+        elif choice == 4:
+            print("Program exited.")
+            break
+        else:
+            print("Invalid choice. Try again.")
+
+main()
+
+// without predefined
+M=[]
+def matrix(M):
+    print("enter order of matrix:-")
+    r=int(input("enter the number of rows : "))
+    c=int(input("enter the number of columns : "))
+    print("Enter the elemnets of matrix:-\n")
+
+    for i in range(r):
+        row = []
+        for j in range(c):
+            y=int(input())
+            row.append(y)
+        M.append(row)
+    print("matrix accepted")
+    
+    
+def display(M,r,c):
+    for i in range(r):
+        
+        for j in range(c):
+            print(M[i][j],end=" ")
+        print()
+
+def saddle_point(M,r,c): 
+    count=0;
+    for i in range(r):                                      #to find minimun element of the row
+        min=M[i][0]
+
+        ci=0
+
+        for j in range(1,c):
+            if  (min > M[i][j]):
+                min=M[i][j];
+                ci=j;                                       #to check if minimun element in the row is also the
+                                                            # maximun element in the column
+        flag=1
+        for ri in range(r):
+            if (min < M[ri][ci]):
+                flag=0
+                break
+        if (flag==1):
+            count+=1
+            print(min,"is the saddle point in the given matrix")    
+    if(count==0):
+        print("No saddle point found in the given matrix")
+    else:
+        print("saddle point found in the given matrix")    
+def main():
+    while True :
+        print(" 1. To accept the matrix")
+        print(" 2. To display the Matrix")
+        print(" 3. To find saddle point of the given Matrix")
+        print(" 4. Exit ")
+        ch = int(input("Enter your Choice : "))
+        if (ch==4):
+            print("End the program")
+            break;
+        elif (ch==1):
+            M =[]
+            print("input matrix")
+            matrix(M)
+            r=len(M)
+            c=len(M[0])
+        elif (ch==2):
+            display(M,r,c)
+        elif (ch==3):
+            display(M,r,c)
+            saddle_point(M,r,c)
+
+        else:
+            print("Please enter the correct choice")
+main()
